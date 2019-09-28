@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<title> Example</title>
+<style type="text/css">
+	body{
+		margin: 0;
+		padding: 0;
+		background-color: lightgray;
+	}
+			.music{
+				width: 100%;
+				height: 600px;
+				background-color: moccasin;
+				margin: 0 auto;
+			}
+			.face{
+				height: 600px;
+				position: relative;
+			}
+			.disk{
+				width: 180px;
+				height: 180px;
+				border: 60px solid black;
+				border-radius: 50%;
+				background-color: red;
+				position: absolute;
+				left: 22px;
+				top: 30px;
+			}
+			.ci{
+				width: 100px;
+				height: 1px;
+				border: 1px solid white;
+				position: absolute;
+				top: 180px;
+				left: 180px;
+			}
+			.pic{
+				width: 120px;
+				margin:30px;
+				border-radius: 50%;
+			}
+			.contral{
+				width: 300px;
+				height: 40px;
+				position: absolute;
+				bottom: 10px;
+				text-align: center;
+				left: 30px;
+			}
+			.contral>input{
+				border: 0;
+				width: 80px;
+				height: 40px;
+				border-radius: 50%;
+			}
+			.mus{
+				position: absolute;
+				bottom: 70px;
+				left: 30px;
+			}
+			#adName{
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				border: 0;
+				height: 40px;
+				line-height: 40;
+				position: absolute;
+				text-align: center;
+				top: 400px;
+				font-size: 18px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div style="line-height: 40px;text-align: center;">袁鑫20190928作业</div>
+		<div class="music">
+			<div class="face">
+				
+				<div class="disk" id="disk">
+					
+					<img id="pic" class="pic" src="../images/3.jpg" alt="">
+				</div>
+				
+				<audio id="audio1" class="mus" controls="controls" src="../audio/zs250.mp3" autoplay="autoplay"></audio>
+				
+				<input id="adName" value="华晨宇 - 智商二五零">
+				
+				<div class="contral">
+					<input type="button" onclick="playContral('pause')" id="" value="暂停" />
+					<input type="button" onclick="playContral('play')" value="播放" />
+					<input type="button" onclick="changeAudio()" id="" value="切歌" />
+				</div>
+				<div class="ci"></div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	
+
+	function playContral( parm ){
+		var au01 = document.getElementById("audio1");
+		au01[parm]();
+	}
+	function playListGo( parm ){
+		if(!parm){
+			return;
+		}
+	}
+	function changeAudio(){
+		var Src = document.getElementById("audio1").src
+		console.info(Src);
+		clearInterval(timer1);
+		if(Src.indexOf("zs250")>=0){
+			document.getElementById("audio1").src="../audio/myyw.mp3";
+			document.getElementById("adName").value = "蔡徐坤 - 没有意外";
+			document.getElementById("pic").src="../images/4.jpg";
+		}else{
+			document.getElementById("audio1").src = "../audio/zs250.mp3";
+			document.getElementById("adName").value = "华晨宇 - 智商二五零";
+			document.getElementById("pic").src="../images/3.jpg";
+		}
+	}
+	
+	document.getElementById("audio1").onplaying = function(){
+		var reg = 0;
+		timer1 = setInterval(function(){
+			reg += 1;
+			document.getElementById("disk").style.transform = "rotate("+reg+"deg)";
+			
+		},20);
+		
+	document.getElementById("audio1").onpause = function(){
+		clearInterval(timer1);
+	};
+	
+	};
+
+</script>

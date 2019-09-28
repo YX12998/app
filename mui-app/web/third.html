@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="MobileOptimized" content="320" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+		<title>xhr_1</title>
+		<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script type="text/javascript">
+			var url = "https://www.dcloud.io/docs/HBuilder.json";
+			var xhr = null;
+
+			function xhrCreate() {
+				if (xhr) {
+					outLine("xhr请求已创建");
+					return;
+				}
+				outSet("创建请求：");
+				xhr = new plus.net.XMLHttpRequest();
+
+				// xhr.responseType = 'json';
+
+				xhr.onreadystatechange = function() {
+					switch (xhr.readyState) {
+						case 0:
+							// outLine("xhr请求已初始化");
+							break;
+						case 1:
+							// outLine("xhr请求已打开");
+							break;
+						case 2:
+							// outLine("xhr请求已发送");
+							break;
+						case 3:
+							// outLine("xhr请求已响应");
+							break;
+						case 4:
+							outLine("xhr请求已完成");
+							if (xhr.status == 200) {
+								// outLine("xhr请求成功：" + xhr.responseText);
+								var Ob = JSON.parse(xhr.responseText);
+								// console.info(typeof(Ob));
+								// console.info(Ob);
+								for (var x in xhr.responseText) {
+									console.info(JSON.stringify(Ob.win[x]));
+									$("#a1").append("<div style='line-height: 30px;background: lightgreen;'>名字: "+JSON.stringify(Ob.win[x].name)+"</div><div>大小: "+JSON.stringify(Ob.win[x].size)+
+									"</div><div>版本: "+JSON.stringify(Ob.win[x].version)+"</div><div>地址: "+JSON.stringify(Ob.win[x].path)+"</div><hr>");
+								}
+							} else {
+								outLine("xhr请求失败：" + xhr.status);
+							}
+							break;
+						default:
+							break;
+					}
+				}
+				xhr.open("GET", url);
+				xhr.send();
+			}
+
+			function xhrResponseHeader() {
+				if (xhr) {
+					if (xhr.readyState != 4) {
+						outLine("xhr请求未完成");
+					} else if (xhr.status != 200) {
+						outSet("xhr请求失败：" + xhr.readyState);
+					} else {
+						outSet("xhr请求响应头数据：");
+						outLine(xhr.getAllResponseHeaders());
+					}
+				} else {
+					outSet("未发送请求");
+				}
+			}
+
+			function xhrAbort() {
+				if (xhr) {
+					outSet("取消请求");
+					if (xhr.readyState != 4) {
+						xhr.abort();
+					}
+					xhr = null;
+				} else {
+					outSet("未发送请求");
+				}
+			}
+		</script>
+		<!-- <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" /> -->
+		<style type="text/css">
+			#aa>div {
+				width: 100%;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="line-height: 40px;text-align: center;">袁鑫20190928作业</div>
+		<hr>
+		<div class="mui-btn mui-btn-primary" onclick="xhrCreate();">发送请求</div>
+		<div class="mui-btn mui-btn-primary" onclick="xhrResponseHeader();">获取所有响应头</div>
+		<div class="mui-btn mui-btn-danger" onclick="xhrAbort();">取消请求</div>
+		<div id="output">
+			XMLHttpRequest管理网络请求操作，可进行跨域网络数据请求。
+		</div>
+		<div id="aa">
+			<div id="a1"></div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/jquery-2.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+	<body>
+		<div class="mui-card">
+			<!--页眉，放置标题-->
+			<div class="mui-card-header">通讯录</div>
+			<!--内容区-->
+			<div class="mui-card-content">
+				<div class="mui-slider">
+					<div class="mui-slider-group mui-slider-loop">
+						<!--支持循环，需要重复图片节点-->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#"><img src="4.jpg" /></a>
+							<!-- <div style="width: 100%;height: 40px;line-height: 40px;">
+								<div style="float: left;width: 50%;text-align: center;background: #000;color: white;">笑笑</div>
+								<div class="ditem" style="width: 50%;text-align: center;float: right;background: wheat;">
+									<a style="text-decoration:none;color:#666;display:block" href="tel:10086">拨打电话</a>
+								</div>
+							</div> -->
+						</div>
+						
+						<div class="mui-slider-item">
+							<a href="#"><img src="images/1.jpg" /></a>
+							<div style="width: 100%;height: 40px;line-height: 40px;">
+								<div style="float: left;width: 50%;text-align: center;background: #000;color: white;">小丽</div>
+								<div class="ditem" style="width: 50%;text-align: center;float: right;background: wheat;">
+									<a style="text-decoration:none;color:#666;display:block" href="tel:10086">拨打电话</a>
+								</div>
+							</div>
+							<div style="padding: 10px;">
+								不要在这个网络上BB赖赖 <br> 不服现实碰一碰 <br> 看我扎不扎你就完了
+							</div>
+							
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img src="images/2.jpg" /></a>
+							<div style="width: 100%;height: 40px;line-height: 40px;">
+								<div style="float: left;width: 50%;text-align: center;background: #000;color: white;">小美</div>
+								<div class="ditem" style="width: 50%;text-align: center;float: right;background: wheat;">
+									<a style="text-decoration:none;color:#666;display:block" href="tel:10086">拨打电话</a>
+								</div>
+							</div>
+							<div style="padding: 10px;">
+								你帮我我帮你, 你不帮我我还帮你 <br> 我帮了你你还骂我 <br> 那我就扎你
+							</div>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img src="images/3.jpg" /></a>
+							<div style="width: 100%;height: 40px;line-height: 40px;">
+								<div style="float: left;width: 50%;text-align: center;background: #000;color: white;">小柔</div>
+								<div class="ditem" style="width: 50%;text-align: center;float: right;background: wheat;">
+									<a style="text-decoration:none;color:#666;display:block" href="tel:10086">拨打电话</a>
+								</div>
+							</div>
+							<div style="padding: 10px;">
+								不要在这个网络上BB赖赖 <br> 不服现实碰一碰 <br> 看我扎不扎你就完了
+							</div>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img src="images/4.jpg" /></a>
+							<div style="width: 100%;height: 40px;line-height: 40px;">
+								<div style="float: left;width: 50%;text-align: center;background: #000;color: white;">笑笑</div>
+								<div class="ditem" style="width: 50%;text-align: center;float: right;background: wheat;">
+									<a style="text-decoration:none;color:#666;display:block" href="tel:10086">拨打电话</a>
+								</div>
+							</div>
+							<div style="padding: 10px;">
+								你帮我我帮你, 你不帮我我还帮你 <br> 我帮了你你还骂我 <br> 那我就扎你
+							</div>
+						</div>
+						
+						<!--支持循环，需要重复图片节点-->
+						<div class="mui-slider-group mui-slider-loop">
+							<a href="#"><img src="1.jpg" /></a>
+							<!-- <div style="width: 100%;height: 40px;line-height: 40px;">
+								<div style="float: left;width: 50%;text-align: center;background: #000;color: white;">小丽</div>
+								<div class="ditem" style="width: 50%;text-align: center;float: right;background: wheat;">
+									<a style="text-decoration:none;color:#666;display:block" href="tel:10086">拨打电话</a>
+								</div>
+							</div> -->
+						</div>
+						
+					</div>
+				</div>
+				
+				
+			</div>
+			<!--页脚，放置补充信息或支持的操作-->
+			<div class="mui-card-footer">联系我们 -- 企鹅: 2429897817</div>
+		</div>
+		
+		<div class="all_pages">
+			<p id="web/second.html">第二个页面</p>
+			<p id="web/third.html">第三个页面</p>
+			<p id="web/fourth.html">第四个页面-多媒体</p>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	//获得slider插件对象
+	var gallery = mui('.mui-slider');
+	gallery.slider({
+		interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
+	});
+	
+	$(function(){
+		$(".all_pages p").click(function( e ){
+			console.info(e.target.id);
+			window.location = e.target.id;
+		});
+		
+		
+		document.addEventListener("touchmove", function(e){
+			console.info(e);
+		}, false);
+	});
+	
+</script>
