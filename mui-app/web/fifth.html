@@ -51,28 +51,23 @@
 			},
 		});
 		
-		// *****************
-		new plus.io.FileReader();
-		
-		plus.io.getImageInfo({
-			src: "../images/4.jpg",
-			success: function(res) {
-				console.info("以下是详细信息:");
-				for (var x in res) {
-					document.getElementById("fileContent").innerHTML+="<br>"+x+": "+res[x];
-					// console.info(x + " : " + res[x]);
-				}
-			},
-			fail: function() {
-				console.info("fail !!!!!!");
-				for (var x in res) {
-					console.info(x + " : " + res[x]);
-				}
-			},
-			complete: function() {
-		
-				console.info("complete");
-			},
+		// 获取文件内容
+		plus.io.requestFileSystem(plus.io.PRIVATE_WWW, function(fs){
+			fs.root.getFile('temp01.txt', {create: true}, function(fileEntry){
+				fileEntry.file(function(file){
+					
+					var fileReader = new plus.io.FileReader(); // 创建一个读取文件实例
+					console.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					fileReader.onloadend = function(e){
+						plus.console.info("read success");
+						plus.console.log(typeof(e.target.result));
+						document.getElementById("fileContent").innerHTML+=e.target.result;
+					};
+					
+					fileReader.readAsText(file,'utf-8');
+				});
+				
+			});
 		});
 		
 	});
