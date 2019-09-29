@@ -8,17 +8,30 @@
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/jquery-2.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body{
+				padding: 2%;
+			}
+			div{
+				word-wrap: break-word;
+			}
+		</style>
 	</head>
 	<body>
+		<p>这里是文件信息</p>
+		<hr>
 		<div id="videoInfo"></div>
+		<hr>
+		<p>这里是文件内容</p>
+		<div id="fileContent"></div>
 	</body>
 </html>
 <script type="text/javascript">
 	document.addEventListener("plusready", function() {
 		// var myIO = new plus.io();
 		
-		plus.io.getVideoInfo({
-			filePath: "../video/wowdemo.mp4",
+		plus.io.getImageInfo({
+			src: "../images/4.jpg",
 			success: function(res) {
 				console.info("以下是详细信息:");
 				for (var x in res) {
@@ -37,5 +50,30 @@
 				console.info("complete");
 			},
 		});
+		
+		// *****************
+		new plus.io.FileReader();
+		
+		plus.io.getImageInfo({
+			src: "../images/4.jpg",
+			success: function(res) {
+				console.info("以下是详细信息:");
+				for (var x in res) {
+					document.getElementById("fileContent").innerHTML+="<br>"+x+": "+res[x];
+					// console.info(x + " : " + res[x]);
+				}
+			},
+			fail: function() {
+				console.info("fail !!!!!!");
+				for (var x in res) {
+					console.info(x + " : " + res[x]);
+				}
+			},
+			complete: function() {
+		
+				console.info("complete");
+			},
+		});
+		
 	});
 </script>
