@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>验证storage</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<div style="text-align: center;line-height: 40px;background: orange;margin-bottom: 10px;">袁鑫2019.10.9作业</div>
+		<div id="mytext"></div>
+		<a href="seventh.html">返回第七个页面</a>
+	</body>
+
+</html>
+<script type="text/javascript">
+	document.addEventListener("plusready", function() {
+		getStorageX();
+	});
+	function showText(text) {
+		document.getElementById("mytext").innerHTML = text || '没数据';
+	}
+	
+	// 获取storage的所有字段, 涉及遍历
+	function getStorageX() {
+		// showText( JSON.stringify(plus.storage) );
+		// showText(plus.storage.getItem("yuan"));
+		var allItem = "";
+		var numKeys = plus.storage.getLength();
+		for (var i = 0; i < numKeys; i++) {
+			var curkey = plus.storage.key(i);
+			var curValue = plus.storage.getItem(curkey);
+			allItem += curkey +":"+ curValue+"<br>";
+		}
+		
+		showText( JSON.stringify(allItem) );
+	}
+	
+</script>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>验证storage</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			input{
+				width: 100%;
+			}
+			#mytext{
+				height: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+
+		<div style="text-align: center;line-height: 40px;background: orange;margin-bottom: 10px;">袁鑫2019.10.9作业</div>
+		<p>
+			<input type="button" value="获取storage信息(遍历)" onclick="getStorageX()" />
+		</p>
+
+		<p>
+			<input type="button" value="向storage存入-yuan" onclick="setOneInfo('yuan', 'yuanxin')" />
+		</p>
+
+		<p>
+			<input type="button" value="向storage修改-yuan" onclick="setOneInfo('yuan', 'xxx')" />
+		</p>
+
+		<hr>
+		<div id="mytext">
+
+		</div>
+		<hr>
+		<p>
+			<input type="button" value="去页面8" onclick="gotoPage('eight.html')" />
+		</p>
+
+	</body>
+
+</html>
+<script type="text/javascript">
+	// 要求1: 页面按钮1点击后, 向storage存入一个字段信息
+	// 要求2: 点击按钮2, 修改storage的该字段
+	// 要求3: 切换到页面8, 尝试读取页面7的留存信息(), 验证其跨域性
+	// 要求4: 若页面8能读取, 那么关掉app, 重新启动, 验证这些数据时已经持久化
+
+	document.addEventListener("plusready", function() {
+
+	});
+
+	// 将信息写到页面上
+	function showText(text) {
+		document.getElementById("mytext").innerHTML = text || '没数据';
+	}
+
+	// 获取storage的所有字段, 涉及遍历
+	function getStorageX() {
+		// showText( JSON.stringify(plus.storage) );
+		// showText(plus.storage.getItem("yuan"));
+		var allItem = "";
+		var numKeys = plus.storage.getLength();
+		for (var i = 0; i < numKeys; i++) {
+			var curkey = plus.storage.key(i);
+			var curValue = plus.storage.getItem(curkey);
+			allItem += curkey +":"+ curValue+"<br>";
+		}
+		
+		showText( JSON.stringify(allItem) );
+	}
+
+	// 设定新的值
+	function setOneInfo(newKey, newValue) {
+		if (!newKey) {
+			newKey = 'yuan';
+			newValue = 'yuanxin';
+		}
+		// 根据api向storage写信息
+		plus.storage.setItem(newKey, newValue);
+		plus.storage.setItem("yyy", "asf");
+		plus.storage.setItem("eee", "arrrr");
+
+	}
+	
+	function gotoPage(pageUrl){
+		window.location = pageUrl;
+	}
+</script>
