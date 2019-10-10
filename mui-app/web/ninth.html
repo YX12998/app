@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			.headTitle {
+				text-align: center;
+				min-height: 40px;
+				line-height: 40px;
+				background: #EC971F;
+				font-size: 24px;
+			}
+
+			#myMap {
+				width: 100%;
+				position: fixed;
+				top: 40px;
+				bottom: 40px;
+				line-height: 200px;
+				text-align: center;
+				background: #FFFFFF;
+			}
+
+			#buttonB {
+				width: 100%;
+				position: absolute;
+				height: 40px;
+				bottom: 0px;
+				text-align: center;
+				line-height: 40px;
+				background: blanchedalmond;
+			}
+
+			#buttonB>input {
+				height: 40px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+
+		<div class="headTitle">袁鑫-2019.10.10-作业</div>
+		<div id="myMap"></div>
+		<div id="buttonB">
+			<input type="button" id="opWV" value="打开页面">
+			<input type="button" id="clWV" value="关闭页面">
+			<input type="button" name="" id="son" value="操作子页" />
+			<input type="button" id="clSel" value="关闭自己">
+		</div>
+
+	</body>
+
+</html>
+
+<script type="text/javascript">
+	var myMapx = null;
+	document.addEventListener("plusready", function() {
+		myMapx = plus.maps.Map("myMap");
+
+		initEvents();
+	});
+
+	var webView01 = null
+
+	function initEvents() {
+		document.getElementById("opWV").onclick = function() {
+			if (!webView01) {
+				webView01 = plus.webview.create("wv01.html", "webView01", {
+					width: "100%",
+					position: "fixed",
+					top: "40px",
+					bottom: "40px",
+					lineHeight: "200px",
+					textAlign: "center",
+					background: "#fff"
+				});
+			}
+
+			webView01.show("slide-in-right", 1000);
+		};
+
+		// 关窗口
+		document.getElementById("clWV").onclick = function() {
+			// if(webView01){
+			// 	webView01.hide("webView01", "zoom-fade-in", 2000);
+			// }
+
+			hideView(webView01);
+		};
+
+		// 关闭自己
+		document.getElementById("clSel").onclick = function() {
+			plus.webview.close(
+				plus.webview.currentWebview()
+			);
+		};
+
+		// 调子页面函数
+		document.getElementById("son").onclick = function() {
+			var b = {
+				"name": "xxx"
+			};
+			webView01.evalJS('heihei(' + JSON.stringify(b) + ')');
+		};
+
+	}
+
+	function hideView(id) {
+		if (webView01) {
+			plus.webview.hide(id, "zoom-fade-in", 1000);
+		}
+	}
+</script>
